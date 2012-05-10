@@ -58,7 +58,7 @@ add_action('publish_post', 'wput_set', 10);//公開記事が編集された場�
 add_action('transition_post_status', 'wput_set', 10);//記事が公開に変更された場合
 
 function wput_set() {
-	if (!empty($_POST)) {
+	if (!empty($_POST['wput_datetime'])) {
 		global $wpdb;
 		$post_id = $_POST['post_ID'];
 		$wpdb->query("DELETE FROM ".WPUT_DB_TABLENAME." WHERE post_id = '".$post_id."'");
