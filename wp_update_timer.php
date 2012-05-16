@@ -58,8 +58,7 @@ add_action('publish_post', 'wput_set', 10);//公開記事が編集された場�
 add_action('transition_post_status', 'wput_set', 10);//記事が公開に変更された場合
 
 function wput_set() {
-	print_r($_POST);
-	exit();
+
 	if (!empty($_POST['wput_datetime'])) {
 		global $wpdb;
 		$post_id = $_POST['post_ID'];
@@ -103,6 +102,10 @@ function wput_output_metabox() {
 ?>
 
 <style type="text/css">
+a.wpsm_maenas {
+
+	display:none;
+}
 
 </style>
 
@@ -117,6 +120,7 @@ function wput_output_metabox() {
 		var named2;
 		console.log(html);
 		var cnt = $(".box").length;
+		alcount = cnt;
 		$(".wpsm_plus").live("click", function(){
 					name="wput_daybox"+cnt;
 					console.log(name);
@@ -136,13 +140,24 @@ function wput_output_metabox() {
 			$(named1).children(".datetime").children("input").attr({name:wput_datetime,value:"",});
 			$(named1).children(".field").children("select").attr({name:wput_field});
 			$(named1).children(".value").children("textarea").attr({name:wput_value,value:"", class:""});
-			
+			$(".wpsm_maenas").css("display","inline");
 			//$(".wpsm_maenas").css("display","inline");					
 			
 					name1=name;
 					cnt =cnt +1;
+					alcount++;
 					console.log(name1);
 			});
+		$('.wpsm_maenas').live('click', function() {
+			console.log($(this).parent().parent());
+			$(this).parent().parent().empty();				
+			alcount--;
+			console.log(alcount);
+			
+			if(2>alcount){
+				$(".wpsm_maenas").css("display","none");
+			}
+		});
 	});
 })(jQuery);
 </script>
