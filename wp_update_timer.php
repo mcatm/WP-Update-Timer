@@ -25,7 +25,7 @@ function wput_do_update() {
 		global $wpdb;
 		
 		$result = $wpdb->get_results("SELECT * FROM `".WPUT_DB_TABLENAME."` WHERE `status` = 0 AND `datetime` < '".date('Y-m-d h:i:s')."'");
-		
+		exit();
 		if ($result) {
 			foreach ($result as $row) {
 				$post_id = $row->post_id;
@@ -58,6 +58,8 @@ add_action('publish_post', 'wput_set', 10);//公開記事が編集された場�
 add_action('transition_post_status', 'wput_set', 10);//記事が公開に変更された場合
 
 function wput_set() {
+	print_r($_POST);
+	exit();
 	if (!empty($_POST['wput_datetime'])) {
 		global $wpdb;
 		$post_id = $_POST['post_ID'];
@@ -129,9 +131,10 @@ function wput_output_metabox() {
 					
 				wput_datetime="wput_datetime[" + cnt + "]";
 					wput_value="wput_value[" + cnt + "]";
+					wput_field="wput_field[" + cnt + "]";
 				console.log($(named1).children(".datetime").children("input"));	
 			$(named1).children(".datetime").children("input").attr({name:wput_datetime,value:"",});
-			
+			$(named1).children(".field").children("select").attr({name:wput_field});
 			$(named1).children(".value").children("textarea").attr({name:wput_value,value:"", class:""});
 			
 			//$(".wpsm_maenas").css("display","inline");					
