@@ -107,7 +107,28 @@ function wput_output_metabox() {
 <script type="text/javascript">
 (function($) {
 	$(function() {
-		
+		var name="wput_daybox";
+		var name1="wput_daybox";
+		var html= $(".wput_daybox").html();
+		var dot ="."
+		var named1;
+		var named2;
+		console.log(html);
+		var cnt = 1;
+		$(".wpsm_plus").live("click", function(){
+					name="wput_daybox"+cnt;
+					console.log(name);
+					named1="."+name;
+					named2="."+name1;
+
+					console.log(named1);
+					classn="<div class="+name+"></div>";
+					$(named2).after(classn);
+					$(named1).append(html);
+					name1=name;
+					cnt =cnt +1;
+					console.log(name1);
+			});
 	});
 })(jQuery);
 </script>
