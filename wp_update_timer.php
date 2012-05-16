@@ -108,13 +108,13 @@ function wput_output_metabox() {
 (function($) {
 	$(function() {
 		var name="wput_daybox";
-		var name1="wput_daybox";
-		var html= $(".wput_daybox").html();
+		var name1="wput_daybox0";
+		var html= $(".wput_daybox0").html();
 		var dot ="."
 		var named1;
 		var named2;
 		console.log(html);
-		var cnt = 1;
+		var cnt = $(".box").length;
 		$(".wpsm_plus").live("click", function(){
 					name="wput_daybox"+cnt;
 					console.log(name);
@@ -125,6 +125,17 @@ function wput_output_metabox() {
 					classn="<div class="+name+"></div>";
 					$(named2).after(classn);
 					$(named1).append(html);
+					
+					
+				wput_datetime="wput_datetime[" + cnt + "]";
+					wput_value="wput_value[" + cnt + "]";
+				console.log($(named1).children(".datetime").children("input"));	
+			$(named1).children(".datetime").children("input").attr({name:wput_datetime,value:"",});
+			
+			$(named1).children(".value").children("textarea").attr({name:wput_value,value:"", class:""});
+			
+			//$(".wpsm_maenas").css("display","inline");					
+			
 					name1=name;
 					cnt =cnt +1;
 					console.log(name1);
@@ -138,7 +149,7 @@ function wput_output_metabox() {
 	foreach($dat as $d):
 ?>
 
-<div class="wput_daybox<?php echo $count?> box">
+<div class="wput_daybox<?php echo $c?> box">
 	<p class="datetime">
 		<label>更新日時</label>
 		<input type="text" name="wput_datetime[<?php echo $c?>]" size="50" tabindex="1" id="wput_time" autocomplete="off"<?php if(isset($d->datetime)):?> value="<?php echo $d->datetime?>"<?php endif;?> />
